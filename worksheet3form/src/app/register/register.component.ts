@@ -31,10 +31,9 @@ export class RegisterComponent implements OnInit {
       comments: values.comments
     }
     for (let i in values){
-      if (i.startsWith('allergies-') && values[i])
+      if (i.startsWith('allergies') && values[i])
         rsvp.allergies.push(i)
     }
-
     console.log(rsvp);
     this.regForm.resetForm();
     this.onNewRSVP.next(rsvp);

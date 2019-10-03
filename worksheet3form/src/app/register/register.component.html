@@ -1,42 +1,72 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+    <div><span>Guest Management System</span></div>
+    <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
 <div>
-    <form (ngSubmit)="onSubmit()" #f="ngForm">
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field class="field-width">
+            <input type = "text" name="name"ngModel required matInput placeholder="Name" > 
+        </mat-form-field>
+        <mat-form-field class="field-width">
+            <input type = "number" min="0" max="3" id="numGuests" name="numGuests" ngModel required matInput placeholder="Number of guests (max 3)">
+        </mat-form-field>
+        <mat-form-field class="field-width">
+            <input type = "phone" name="phone" ngModel required matInput placeholder="Contact Number">
+        </mat-form-field>
+        <mat-form-field class="field-width">
+            <input matInput [matDatepicker]="picker" name="day" ngModel required placeholder="Attending Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
         <div>
-            <label for = "name"><b>Name</b></label>
-            <input type = "text" id="name" name="name" ngModel required>
+            <mat-label>Vegetarian? </mat-label><br>
+            <mat-radio-group name="vegetarian" ngModel required>
+                <mat-radio-button value="Yes" class="radio-margin">Yes</mat-radio-button>
+                <mat-radio-button value="No" class="radio-margin">No</mat-radio-button>
+            </mat-radio-group>
         </div>
         <div>
-            <label for = "numGuests"><b>Number of Guests</b></label>
-            <input type = "number" min="0" max="3" id="numGuests" name="numGuests" ngModel required>
+            <mat-label>Any Allergies? </mat-label><br>
+            <mat-checkbox class="checkbox-margin" name="allergies-peanut" ngModel>PEANUT</mat-checkbox>
+            <mat-checkbox class="checkbox-margin" name="allergies-gluten" ngModel>GLUTEN</mat-checkbox>
+            <mat-checkbox class="checkbox-margin" name="allergies-dairy" ngModel>DAIRY</mat-checkbox>
+            <mat-checkbox class="checkbox-margin" name="allergies-seafood" ngModel>SEAFOOD</mat-checkbox>
         </div>
-        <div>
-            <label for ="phone"><b>Contact Number</b></label>
-            <input type = "phone" id="phone" name="phone" ngModel required>
-        </div>
-        <div>
-            <label for ="day"><b>Select day</b></label>
-            <input type = "date" id="day" name="day" ngModel required>
-        </div>
-        <label for ="vegetarian"><b>Vegetarian?</b></label>
-        <div class="radio">
-            <label>
-                <input type="radio" id="vegetarian" name="vegetarian" value="Yes" ngModel required>
-            Yes</label><br>
-            <label>
-                <input type="radio" id="vegetarian" name="vegetarian" value="No" ngModel required>
-            No</label>
-        </div>
-        <label for ="allergies"><b>Food allergies?</b></label><br>
+        <!-- <label for ="allergies"><b>Food allergies?</b></label><br>
         <input type="checkbox" name="allergies-peanut" id="allergies" ngModel>PEANUT<br>
         <input type="checkbox" name="allergies-gluten" id="allergies" ngModel>GLUTEN<br>
         <input type="checkbox" name="allergies-dairy" id="allergies" ngModel>DAIRY<br>
-        <input type="checkbox" name="allergies-seafood" id="allergies" ngModel>SEAFOOD<br>
-        <label for="comments">Comments or Questions?</label>
+        <input type="checkbox" name="allergies-seafood" id="allergies" ngModel>SEAFOOD<br> -->
+        <mat-form-field class="field-width">
+            <mat-label>Comments or Questions?</mat-label>
+            <textarea name="comment" ngModel matInput
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+        <!-- <label for="comments">Comments or Questions?</label>
         <div id="comments">
             <textarea name="comment" id="comment" ngModel></textarea>
-        </div>
+        </div> -->
         <div>
-            <button type="reset">Reset</button>
-            <button type="submit" [disabled]="!f.valid">Submit</button>
+            <button mat-flat-button type="reset">Clear</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!f.valid">Submit</button>
         </div>
     </form>
 </div>
