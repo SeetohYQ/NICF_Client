@@ -1,0 +1,42 @@
+<div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div>
+            <label for = "name"><b>Name</b></label>
+            <input type = "text" id="name" name="name" ngModel required>
+        </div>
+        <div>
+            <label for = "numGuests"><b>Number of Guests</b></label>
+            <input type = "number" min="0" max="3" id="numGuests" name="numGuests" ngModel required>
+        </div>
+        <div>
+            <label for ="phone"><b>Contact Number</b></label>
+            <input type = "phone" id="phone" name="phone" ngModel required>
+        </div>
+        <div>
+            <label for ="day"><b>Select day</b></label>
+            <input type = "date" id="day" name="day" ngModel required>
+        </div>
+        <label for ="vegetarian"><b>Vegetarian?</b></label>
+        <div class="radio">
+            <label>
+                <input type="radio" id="vegetarian" name="vegetarian" value="Yes" ngModel required>
+            Yes</label><br>
+            <label>
+                <input type="radio" id="vegetarian" name="vegetarian" value="No" ngModel required>
+            No</label>
+        </div>
+        <label for ="allergies"><b>Food allergies?</b></label><br>
+        <input type="checkbox" name="allergies-peanut" id="allergies" ngModel>PEANUT<br>
+        <input type="checkbox" name="allergies-gluten" id="allergies" ngModel>GLUTEN<br>
+        <input type="checkbox" name="allergies-dairy" id="allergies" ngModel>DAIRY<br>
+        <input type="checkbox" name="allergies-seafood" id="allergies" ngModel>SEAFOOD<br>
+        <label for="comments">Comments or Questions?</label>
+        <div id="comments">
+            <textarea name="comment" id="comment" ngModel></textarea>
+        </div>
+        <div>
+            <button type="reset">Reset</button>
+            <button type="submit" [disabled]="!f.valid">Submit</button>
+        </div>
+    </form>
+</div>
