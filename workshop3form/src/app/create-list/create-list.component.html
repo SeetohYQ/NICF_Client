@@ -1,0 +1,45 @@
+<div fxLayOut="column row" fxLayoutAlign="center">
+    <form #f="ngForm" (ngSubmit)="processForm()">
+    <h2 fxLayoutAlign="center" *ngIf="!editMode;  else editing">Add New Task</h2>
+    <ng-template #editing>
+        <h2 fxLayoutAlign="center">Edit Existing Task</h2>
+    </ng-template>
+        <div>
+            <mat-form-field>
+                <input matInput type = "text" name="description" id="description"  ngModel required placeholder="Add Description" > 
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-label for = "priorities">Priority: </mat-label>    
+            <mat-radio-group name="priorityLevel" id="priorities" [ngModel]="defaultPriority"
+            fxLayout="column" fxLayoutGap="1vh">
+                <mat-radio-button *ngFor="let priority of priorities" [value]="priority">
+                {{priority}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+            
+        <div style="margin-bottom: 10px">
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" name="dueDate" 
+                required 
+                placeholder="Due Date"
+                [ngModel]="today"
+                validDueDate 
+                #dateField="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="dateField.hasError('dueDate')">Due date cannot be before today</mat-error>
+                <mat-error *ngIf="dateField.invalid">Invalid date</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="space-between" *ngIf="!editMode">
+            <button mat-flat-button color="primary" type="reset">Reset</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!f.valid">Add</button>
+        </div>
+        <div fxLayoutAlign="end" *ngIf="editMode">
+            <button mat-flat-button color="primary" type="submit" [disabled]="!f.valid">Save</button>
+        </div>
+    </form>
+</div>

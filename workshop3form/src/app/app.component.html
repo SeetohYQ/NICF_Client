@@ -1,0 +1,6 @@
+<mat-toolbar>To-Do List</mat-toolbar>
+<div>
+    <app-create-list (addNewTask)="addToList(newTask = $event)"></app-create-list>
+
+    <app-outstanding-list [tasks]="allTasks" fxLayoutAlign="center"></app-outstanding-list>
+</div>
