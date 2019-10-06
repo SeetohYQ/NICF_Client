@@ -1,4 +1,10 @@
-<mat-toolbar>To-Do List</mat-toolbar>
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+    <span>To-Do List</span>
+    <button mat-icon-button [disabled]="!shareable"
+    (click)="shareTheApp()">
+    <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
 <div>
     <app-create-list (addNewTask)="addToList(newTask = $event)"></app-create-list>
 

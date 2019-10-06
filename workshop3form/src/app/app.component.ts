@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'To-do List';
   newTask: ToDoList;
   allTasks: ToDoList[];
+  shareable = false;
 
   constructor(private toDoService: ToDoService){
 
@@ -19,10 +20,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.allTasks = this.toDoService.getAllTasks();
+    this.shareable = !! navigator['share'];
   }
 
   addToList(){
     this.toDoService.addTask(this.newTask);
     this.allTasks = this.toDoService.getAllTasks();
+  }
+
+  shareTheApp() {
+    navigator['share']({
+      title: 'To-do List',
+      text: 'Keep your life on track!',
+      url: 'https://developers.google.com/web',
+  })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
   }
 }
